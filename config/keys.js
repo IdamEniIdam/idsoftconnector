@@ -1,5 +1,5 @@
-module.exports = {
-  mongoURL:
-    "mongodb://soft-dev:AlmightyGodid89@ds015713.mlab.com:15713/id-soft-dev",
-  mongoURIL: "mongodb://localhost:27017/id-soft-dev"
-};
+if (process.env.NODE_ENV === "production") {
+  module.exports = require("./keys_prod");
+} else {
+  module.exports = require("./keys_dev");
+}
