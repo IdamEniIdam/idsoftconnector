@@ -12,6 +12,9 @@
     "heroku-postbuild":
       "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
+  "engines": {
+    "node": "11.2.0"
+  },
   "author": "Idam Eni Idam",
   "license": "MIT",
   "dependencies": {
