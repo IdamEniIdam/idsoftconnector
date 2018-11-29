@@ -31,15 +31,20 @@ app.use(passport.initialize());
 // Passport Config
 require("./config/passport")(passport);
 
+//Use Routes
+app.use("/api/users", users);
+app.use("/api/profile", profile);
+app.use("/api/posts", posts);
+
 const corsOptions = {
-  Origin: "http://idsoftconnector.herokuapp.com",
+  Origin: "https://idsoftconnector.herokuapp.com",
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
 app.use((req, res, next) => {
   res.header(
     "Access-Control-Allow-Origin",
-    "http://idsoftconnector.herokuapp.com"
+    "https://idsoftconnector.herokuapp.com"
   );
   res.header(
     "Access-Control-Allow-Headers",
@@ -48,19 +53,14 @@ app.use((req, res, next) => {
   next();
 });
 
-//Use Routes
-app.use("/api/users", users);
-app.use("/api/profile", profile);
-app.use("/api/posts", posts);
-
 // Server static assets if in production
 if (process.env.NODE_ENV === "production") {
   // Set static folder
-  app.use(express.static("client/public"));
+  app.use(express.static("client/build"));
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "public", "index.html"));
-  });
+  // app.get("*", (req, res) => {
+  //   res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  // });
 }
 
 const port = process.env.PORT || 5000;
