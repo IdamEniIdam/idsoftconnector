@@ -38,14 +38,14 @@ app.use("/api/profile", profile);
 app.use("/api/posts", posts);
 
 const corsOptions = {
-  Origin: "http://idsoftconnector.herokuapp.com",
+  Origin: "https://idsoftconnector.herokuapp.com",
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
 app.use((req, res, next) => {
   res.header(
     "Access-Control-Allow-Origin",
-    "http://idsoftconnector.herokuapp.com"
+    "https://idsoftconnector.herokuapp.com"
   );
   res.header(
     "Access-Control-Allow-Headers",
