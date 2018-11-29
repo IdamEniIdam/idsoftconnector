@@ -31,13 +31,8 @@ app.use(passport.initialize());
 // Passport Config
 require("./config/passport")(passport);
 
-//Use Routes
-app.use("/api/users", users);
-app.use("/api/profile", profile);
-app.use("/api/posts", posts);
-
 const corsOptions = {
-  origin: "http://idsoftconnector.herokuapp.com",
+  Origin: "http://idsoftconnector.herokuapp.com",
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
@@ -52,6 +47,11 @@ app.use((req, res, next) => {
   );
   next();
 });
+
+//Use Routes
+app.use("/api/users", users);
+app.use("/api/profile", profile);
+app.use("/api/posts", posts);
 
 // Server static assets if in production
 if (process.env.NODE_ENV === "production") {
