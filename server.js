@@ -38,9 +38,19 @@ app.use("/api/profile", profile);
 app.use("/api/posts", posts);
 
 const corsOptions = {
-  Origin: "https//idsoftconnector.herokuapp.com",
+  Origin: "http//idsoftconnector.herokuapp.com",
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
+
+// Server static assets if in production
+if (process.env.NODE_ENV === "production") {
+  // Set static folder
+  app.use(express.static("client/build"));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 
 app.use((req, res, next) => {
   res.header(
@@ -53,16 +63,6 @@ app.use((req, res, next) => {
   );
   next();
 });
-
-// Server static assets if in production
-if (process.env.NODE_ENV === "production") {
-  // Set static folder
-  app.use(express.static("client/build"));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  });
-}
 
 const port = process.env.PORT || 5000;
 
